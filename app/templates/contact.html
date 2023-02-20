@@ -1,31 +1,45 @@
 {% extends "base.html" %}
 
 {% block main %}
+<div class="form-container">
     <h2>Contact Form</h2>
     <hr>
     <p>Fill in this form to contact the site owners.</p>
-    
-    <form action="/process" method="post">
-        <div>
-            <label for="name">Name <span style="color:red;">(Required)</span></label>
-            <p>Please enter your full name.</p>
-            <input type="text" id="name" name="full_name" />
+    <form class="mb-5 data" method="POST" id="contactForm" name="contactForm" action="/contact">
+        {{ form.csrf_token}}
+        <div class="row">
+            <div class="col-md-4 form-group">
+                <h6>{{ form.name.label}} <span class="red-word">(Required)</span></h6>
+                <p>Please enter your full name.</p>
+                {{ form.name (class="form-control", placeholder=form.name.label.text)}}
+            </div>
+         </div>
+         <div class="row">
+            <div class="col-md-4 form-group">
+                <h6>{{ form.email.label}} <span class="red-word">(Required)</span></h6>
+                <p>Please enter your e-mail address.</p>
+               
+                {{ form.email (class="form-control", placeholder=form.email.label.text) }}
+
+            </div>
         </div>
-        <div>
-            <label for="mail">E-mail <span style="color:red;">(Required)</span></label>
-            <p>Please enter your e-mail address.</p>
-            <input type="email" id="mail" name="email" />
-        </div>
-        <div>
-            <label for="subj">Subject <span style="color:red;">(Required)</span></label>
-            <p>Please enter the subject for your message.</p>
-            <input type="text" id="subj" name="subject"/>
-        </div>
-        <div>
-            <label for="msg">Message <span style="color:red;">(Required)</span></label>
-            <p>Please enter the message you would like to send.</p>
-            <textarea id="msg" name="message"></textarea>
-        </div>
-            <button type="submit">Send</button>
-       </form>
+        <div class="row">
+            <div class="col-md-4 form-group">
+                <h6>{{ form.subject.label}} <span class="red-word">(Required)</span></h6>
+                <p>Please enter the subject of the message.</p>
+                {{ form.subject (class="form-control", placeholder=form.name.label.text)}}
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-md-4 form-group">   
+                <h6>{{ form.message.label }} <span class="red-word">(Required)</span></h6>
+                <p>Please enter the message you would like to send.</p>
+                {{ form.message (class="form-control", cols="30", rows="7", placeholder="Write your message") }}
+
+            </div>
+        </div>      
+        <br>
+        {{ form.submit (class="btn btn-primary rounded-0 py-2 px-4" ) }}
+
+</div>
 {% endblock %}
